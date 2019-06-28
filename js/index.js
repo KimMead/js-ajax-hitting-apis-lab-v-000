@@ -26,4 +26,3 @@ function displayRepositories(event, data) {
   }).join('') + "</ul>"
   document.getElementById("repositories").innerHTML = repoList
 }
-
