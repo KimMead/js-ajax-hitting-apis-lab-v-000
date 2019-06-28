@@ -26,3 +26,14 @@ function displayRepositories(event, data) {
   }).join('') + "</ul>"
   document.getElementById("repositories").innerHTML = repoList
 }
+function getCommits(element) {
+  const repoName = element.dataset.repository
+  const userName = element.dataset.username
+  const commitsURL = `${gitURL}/repos/${userName}/${repoName}/commits`
+
+  const req = new XMLHttpRequest()
+
+  req.addEventListener("load", displayCommits)
+  req.open("GET", commitsURL)
+  req.send()
+}
