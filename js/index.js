@@ -54,3 +54,23 @@ function displayCommits() {
   }).join('') + "</ul>"
   document.getElementById('details').innerHTML = commitsList
 }
+function getBranches(element) {
+  const repoName = element.dataset.repository
+  const userName = element.dataset.username
+  const branchesURL = `${gitURL}/repos/${userName}/${repoName}/branches`
+
+  const req = new XMLHttpRequest()
+
+  req.addEventListener('load', displayBranches)
+  req.open('GET', branchesURL)
+  req.send()
+}
+
+function displayBranches(event, data) {
+  const branches = JSON.parse(this.responseText)
+
+  const branchesList = "<ul>" + branches.map(branch => {
+    return(`<li>${branch.name}</li>`)
+  }).join('') + "</ul>"
+  document.getElementById('details').innerHTML = branchesList
+}
