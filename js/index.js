@@ -37,3 +37,21 @@ function getCommits(element) {
   req.open("GET", commitsURL)
   req.send()
 }
+function displayCommits() {
+  const commits = JSON.parse(this.responseText)
+
+  const commitsList = "<ul>" + commits.map(commit => {
+    const commitAuthor = commit['author']['login']
+    const commitAuthorName = commit['commit']['author']['name']
+    const commitMessage = commit['commit']['message']
+
+    return (`
+      <li>
+        <p><strong>Author's Name:</strong> ${commitAuthorName}</p>
+        <strong>${commitAuthor}</strong> - ${commitMessage}
+      </li>
+    `)
+  }).join('') + "</ul>"
+  document.getElementById('details').innerHTML = commitsList
+}
+
